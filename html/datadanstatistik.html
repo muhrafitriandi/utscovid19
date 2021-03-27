@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EDU-COVID | Kasus</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="../css/beranda.css">
+
+</head>
+<body>
+    <header>
+        <a href="#" class="logo">EDU-COVID<span class="fas fa-virus"></span></a>
+        <div id="menu" class="fas fa-bars"></div>
+        <nav class="navbar">
+            <ul>
+                <li><a href="beranda.html">Beranda</a></li>
+                <li><a href="pencegahan.html">Pencegahan</a></li>
+                <li><a class="active" href="datadanstatistik.html">Data dan Statistik</a></li>
+                <li><a href="kuis.html">Kuis</a></li>
+                <li><a href="kontak.html">Kontak</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <!-- DATA DAN STATISTIK -->
+    <div class="container">
+      <h2>Live Kasus COVID-19 di <span id="country"></span> <img src="" id="flag"></h2>
+      <div class="board">
+        <div class="card a"><i class="fa fa-tachometer"></i><h5>Active Cases</h5><span id="active"></span></div>
+        <div class="card ca"><i class="fa fa-th-list"></i><h5>Total Cases</h5><span id="cases"></span></div>
+        <div class="card cr"><i class="fa fa-times-circle"></i><h5>Critical Cases</h5><span id="critical"></span></div>
+        <div class="card d"><i class="fa fa-times"></i><h5>Total Deaths</h5><span id="death"></span></div>
+        <div class="card r"><i class="fa fa-check-square-o"></i><h5>Recovered Cases</h5><span id="recovered"></span></div>
+        <div class="card t"><i class="fa fa-eye"></i><h5>Total Testes Done</h5><span id="tests"></span></div>
+      </div>
+    </div>
+</body>
+</html>
+
+<script type="text/javascript">
+    fetch('https://corona.lmao.ninja/v2/countries/Indonesia').then((response) => {
+        return response.json();
+    })
+    
+    .then((data) => {
+        console.log(data);
+        document.getElementById("country").innerHTML = data.country;
+        document.getElementById("active").innerHTML = data.active.toLocaleString();
+        document.getElementById("cases").innerHTML = data.cases.toLocaleString();
+        document.getElementById("critical").innerHTML = data.critical.toLocaleString();
+        document.getElementById("death").innerHTML = data.deaths.toLocaleString();
+        document.getElementById("recovered").innerHTML = data.recovered.toLocaleString();
+        document.getElementById("tests").innerHTML = data.tests.toLocaleString();
+        document.getElementById("flag").src = data.countryInfo.flag;
+    });
+</script>
